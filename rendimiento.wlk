@@ -2,10 +2,12 @@ object tito {
   var peso = 70
   var inercia = 490
   var ultimaBebidaTomada = null
+  var dosisBebida = 0
 
   method peso() = peso
   method inercia() = inercia
   method ultimaBebidaTomada() = ultimaBebidaTomada
+  method dosisBebida() = dosisBebida
 
   method cambiarPeso(nuevoPeso){
     peso = nuevoPeso
@@ -14,38 +16,31 @@ object tito {
     inercia = nuevaInercia
   }
 
-  method velocidad(cantidadDeBebida){
-    const rendimiento = self.consumir(cantidadDeBebida,ultimaBebidaTomada)
-    return ( rendimiento * self.inercia() ) / self.peso()
+  method velocidad(){
+  
+    return ( ultimaBebidaTomada.rendimiento() * self.inercia() ) / self.peso()
   }
 
   method consumir(cantidad,bebida){
-    var rendimiento = 0
-    if(bebida.nombre() == "whisky"){
-      rendimiento = 0.9 ** cantidad
-      ultimaBebidaTomada = whisky
-    }else if(bebida.nombre() == "terere"){
-      rendimiento = 0.1 * cantidad
-      ultimaBebidaTomada = terere
-      if(rendimiento < 1){
-        rendimiento = 1
-      }
-    }
-    else{
-      ultimaBebidaTomada = cianuro
-    }
-    return rendimiento
+    ultimaBebidaTomada = bebida
+    dosisBebida = cantidad
   }
 }
 
 object whisky{
-  method nombre() = "whisky"
+  method rendimiento(){
+    return 0.9 ** tito.dosisBebida()
+  }
 }
 
 object terere{
-  method nombre() = "terere"
+  method rendimiento(){
+    return 0.1 * tito.dosisBebida()
+  }
 }
 
 object cianuro{
-  method nombre() = "cianuro"
+  method rendimiento(){
+    return 0
+  }
 }
