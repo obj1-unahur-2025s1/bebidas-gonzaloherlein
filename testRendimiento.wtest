@@ -1,0 +1,17 @@
+import rendimiento.*
+
+describe "group of tests for tito" {
+
+  test "Velocidad base de Tito consumiendo 10 cm3 de whisky" {
+    tito.consumir(10,whisky)
+    assert.equals(2.44076,tito.velocidad(10))
+  }
+  test "Velocidad base de tito consumiendo 10 cm3 de terere" {
+    tito.consumir(10,terere)
+    assert.equals(7,tito.velocidad(10))
+  }
+  test "Velocidad base de tito consumiendo 10cm3 de cianuro"{
+    tito.consumir(10,cianuro)
+    assert.equals(0,tito.velocidad(10))
+  }
+}
